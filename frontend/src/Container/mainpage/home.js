@@ -19,8 +19,10 @@ class home extends Component {
     console.log(this.props);
     Axios.get(`http://127.0.0.1:5000/get_customer_details/${this.props.userName}`)
       .then(response => {
+
         this.setState({ customerDetail: response.data });
         this.setState({ fetched: true });
+        
         Axios.get(`http://127.0.0.1:5000/get_customer_deposit_account/${this.props.userName}`)
           .then(response => {
             this.setState({ customerAccDetail: response.data[0] });
@@ -28,7 +30,19 @@ class home extends Component {
           }).catch(error => {
             console.log(error.data);
           });
+
+          Axios.get(`http://127.0.0.1:5000/get_transaction/${this.props.userName}`)
+          .then(response => {
+            this.setState({ customerAccDetail: response.data[0] });
+            console.log(response.data[0]);
+          }).catch(error => {
+            console.log(error.data);
+          });
+
+
         console.log(response.data);
+
+
       })
       .catch(error => {
         console.log(error.data);
