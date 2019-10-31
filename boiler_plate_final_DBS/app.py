@@ -193,15 +193,30 @@ def get_balance_deposit_accounts(userName):
 #   # GET transaction details
 
 
-@app.route('/get_transaction/<userName>/<begin>/<end>', methods=['GET'])
-def get_transaction(userName, begin, end):
-  print(userName, begin, end)
-  url = 'http://techtrek-api-gateway.ap-southeast-1.elasticbeanstalk.com/transactions/' + userName + '?from=' + begin + '&to=' + end
-  r = requests.get(url, headers={'identity': 'Group28', 'token': 'cdf48b04-7b42-43a4-a78a-1b781fd3f2d0'}).json()
+@app.route('/get_transaction/<userName>', methods=['GET'])
+def get_transaction(userName):
+  url = 'http://techtrek-api-gateway.ap-southeast-1.elasticbeanstalk.com/customers/' + userName
+  r = requests.get(url, headers={'identity': 'Group28', 'token': 'cdf48b04-7b42-43a4-a78a-1b781fd3f2d0'} ).json()
+  customer_id = r['customerId']
 
-  return r
+  secondary_url = 'http://techtrek-api-gateway.ap-southeast-1.elasticbeanstalk.com/accounts/deposit/' + customer_id
+  print(secondary_url)
+  r_customer_deposit_account = requests.get(secondary_url, headers={'identity': 'Group28', 'token': 'cdf48b04-7b42-43a4-a78a-1b781fd3f2d0'} ).json()
+  r_customer_deposit_account = jsonify(r_customer_deposit_account)
+
+  test = r_customer_deposit_account
+  data = json.loads(test.data)
+  print(data[0]['accountId'])
+  # print(test["accountId"])
+
+  account_id = data[0]['accountId']
+  tiertary_url = 'http://techtrek-api-gateway.ap-southeast-1.elasticbeanstalk.com/transactions/{}?from=01-01-2018&to=02-01-2019'.format(account_id)
+  print(tiertary_url)
+  tiertary_r = requests.get(tiertary_url, headers={'identity': 'Group28', 'token': 'cdf48b04-7b42-43a4-a78a-1b781fd3f2d0'} ).json()
+  tiertary_r = jsonify(tiertary_r)
 
 
+  return tiertary_r
 
 
 # Run Server
