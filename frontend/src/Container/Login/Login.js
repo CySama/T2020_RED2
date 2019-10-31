@@ -10,7 +10,27 @@ var sectionStyle = {
     backgroundImage: "url(" + { Background } + ")"
   };
 
+
+
 class Login extends Component{
+    state= {
+        "user":{
+            "userName": "",
+            "password": ""
+        }
+    }
+    changePassword = event => {
+        console.log(event.target.value);
+        let temp = this.state.user;
+        temp.password = event.target.value;
+        this.setState(temp);
+    }
+    changeUserName = event => {
+        console.log(event.target.value);
+        let temp = this.state.user;
+        temp.userName = event.target.value;
+        this.setState(temp);
+    }
     render(){
         return(
             <Container fluid >
@@ -28,7 +48,7 @@ class Login extends Component{
                                             <FaUserAlt />
                                         </span>
                                     </InputGroup.Prepend>
-                                    <Form.Control type="text" placeholder="Username" className={classes.Input}/>
+                                    <Form.Control type="text" placeholder="Username" className={classes.Input} value={this.state.user.userName} onChange={(event) => this.changeUserName(event)}/>
                                 </InputGroup>
                             </Row>
                             <Row className={classes.Row}> 
@@ -38,7 +58,7 @@ class Login extends Component{
                                             <FaLock />
                                         </span>
                                     </InputGroup.Prepend>
-                                    <Form.Control type="password" placeholder="Password" className={classes.Input}/>
+                                    <Form.Control type="password" placeholder="Password" className={classes.Input} value={this.state.user.password} onChange={(event) => this.changePassword(event)}/>
                                 </InputGroup>
                             </Row>
                             </Form>
