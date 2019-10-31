@@ -5,6 +5,7 @@ from flask_cors import CORS, cross_origin
 
 import os
 import requests
+import json
 
 # Init app
 app = Flask(__name__)
@@ -71,14 +72,32 @@ def add_customer():
 #   return product_schema.jsonify(product)
 
 #Check login credientials
-@app.route('/login/<userName>', methods=['GET'])
+@app.route('/login', methods=['POST'])
 @cross_origin()
-def login(userName):
-  print(userName)
-  customer = Person.query.get(1)
-  customer = person_schema.jsonify(customer)
+def login():
+  userName = request.json['name']
+  password = request.json['password']
 
-  return person_schema.jsonify(customer)
+  customer_dict = {
+    "limzeyang": "1",
+    "marytan": "2",
+    "prasannaghali": "3"
+  }
+  # print(customer_dict[userName])
+  # print(userName)
+  # print(userPassword)
+
+  customer = Person.query.get(customer_dict[userName])
+  customer = person_schema.jsonify(customer)
+  #json1_file = json.loads(customer)
+  data = json.loads(customer.data)
+  legit_password = data["password"]
+
+  print(legit_password)
+  if legit_password == password:
+    return userName
+
+  return "invalid inputs"
 
 
 # 3.1 Customers Information
