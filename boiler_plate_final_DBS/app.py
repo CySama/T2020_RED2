@@ -211,6 +211,15 @@ def get_personal_message(userName):
 
   return r_secondary
 
+## GET List of Marketing Messages
+@app.route('/get_marketing_msg', methods=['GET'])
+@cross_origin()
+def get_marketing_msg():
+  url = 'http://techtrek-api-gateway.ap-southeast-1.elasticbeanstalk.com/marketing'
+  r = requests.get(url, headers={'identity': 'Group28', 'token': 'cdf48b04-7b42-43a4-a78a-1b781fd3f2d0'} ).json()
+  r = jsonify(r)
+
+  return r
 
 # Run Server
 if __name__ == '__main__':
