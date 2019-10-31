@@ -11,10 +11,9 @@ class App extends Component {
     userName: ""
 
   }
-  setLogin = (value,userName) => {
-    this.setState({login: value});
-    if(value===true)
-      this.setState({userName: userName});
+  setLogin = (value,userNameValue) => {
+    console.log(userNameValue);
+    this.setState({login: value, userName: userNameValue});
   }
 
   render(){
@@ -23,7 +22,7 @@ class App extends Component {
         <header className="App-header">
           {
             !this.state.login?<Login setLogin = {(value) => this.setLogin(value)}/>: 
-            <MainPage />
+            <MainPage userName={this.state.userName}/>
         }
           
 
