@@ -66,8 +66,8 @@ class home extends Component {
                     }}
                     rootProps={{ 'data-testid': '2' }}
                   />
-                </Col>
-                <Col sm={{ span: 12 }} md={{ span: 9 }}>
+                  <br/>
+                  <Col sm={{ span: 12 }} md={{ span: 9 }}>
                   <Chart
                     width={'500px'}
                     height={'300px'}
@@ -92,6 +92,8 @@ class home extends Component {
                     rootProps={{ 'data-testid': '5' }}
                   />
                 </Col>
+                </Col>
+
               </Row>
             </Tab.Container>
             : null}
