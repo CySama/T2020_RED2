@@ -108,9 +108,7 @@ def get_customer_id(userName):
   print(userName)
   url = 'http://techtrek-api-gateway.ap-southeast-1.elasticbeanstalk.com/customers/' + userName
   r = requests.get(url, headers={'identity': 'Group28', 'token': 'cdf48b04-7b42-43a4-a78a-1b781fd3f2d0'} ).json()
-  #r = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
-  #print(r)
-  # return r['bpi']['EUR']['rate']
+
   return r
 
 
