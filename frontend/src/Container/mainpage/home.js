@@ -7,6 +7,7 @@ class home extends Component {
 
   state = {
     customerDetail: {},
+    customerAccDetail: {},
     fetched: false
   }
 
@@ -15,7 +16,14 @@ class home extends Component {
     Axios.get("http://127.0.0.1:5000/get_customer_details/marytan")
     .then(response => {
         this.setState({customerDetail: response.data});
-        this.setState({fetched: true});
+        Axios.get("http://127.0.0.1:5000/get_customer_deposit_account/marytan")
+        .then(response => {
+          this.setState({customerAccDetail: response.data[0]});
+          console.log(response.data[0]);
+          this.setState({fetched: true});
+        }).catch(error =>{
+          console.log(error.data);  
+        });
         console.log(response.data);
       })
       .catch(error => {
@@ -29,8 +37,8 @@ class home extends Component {
             {this.state.fetched?
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <Row>
-              <Col sm={3}>
-              <LeftSide imageLink={"https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"} customerDetail={this.state.customerDetail}/>
+              <Col sm={{span:12}} md={{span: 3}}>
+              <LeftSide imageLink={"https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"} customerDetail={this.state.customerDetail} customerAccDetail = {this.state.customerAccDetail}/>
               {/* Hi! {this.state.customerDetail.gender=="Female"? "Ms.": (this.state.customerDetail.gender=="Male"?"Mr.":" ")}{this.state.customerDetail.firstName} {this.state.customerDetail.lastName} */}
                 <Nav variant="pills" className="flex-column">
                   <Nav.Item>
@@ -44,7 +52,7 @@ class home extends Component {
                   </Nav.Item>
                 </Nav>
               </Col>
-              <Col sm={9}>
+              <Col sm={{span:12}} md={{span: 9}}>
                 <Tab.Content>
                   <Tab.Pane eventKey="first">
                     <Chart

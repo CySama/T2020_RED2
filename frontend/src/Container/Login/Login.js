@@ -34,7 +34,7 @@ class Login extends Component{
     }
 
     login = event => {
-        Axios.get("http://127.0.0.1:5000/get_customer_details/marytan")
+        Axios.get("http://127.0.0.1:5000/login")
         .then(response => {
             console.log(response.data);
         })

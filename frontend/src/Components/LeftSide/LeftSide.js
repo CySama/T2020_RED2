@@ -12,14 +12,26 @@ const leftSide = props => {
                     <ResponsiveEmbed aspectRatio="1by1">
                         <Image src = {props.imageLink} className={classes.Image}/>
                     </ResponsiveEmbed>
-                    <Card.Text>
+                    
                     Hi! {props.customerDetail.gender=="Female"? "Ms.": (props.customerDetail.gender=="Male"?"Mr.":" ")}{props.customerDetail.firstName} {props.customerDetail.lastName}
                     <br />
                     Last Login: {props.customerDetail.lastLogIn}
 
-                    </Card.Text>
+                    
+                </Card.Body>
+                
+                <Card.Body>
+                    
+                    Account Number: {props.customerAccDetail.accountNumber}
+                    {props.customerAccDetail.displayName}
+                    Type: {props.customerAccDetail.type}
+                    <br />
+                    Last Login: {props.customerDetail.lastLogIn}
+
+                    
                 </Card.Body>
                 </Card>
+                
         </React.Fragment>
     );
 }

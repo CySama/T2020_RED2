@@ -5,9 +5,9 @@
 
 .CentralContent {
     color: #7196da;
-    justify-content: center;    
+    justify-content: flex-start;    
     text-align: center;
-    font-weight: lighter;
+    font-family: 10px;
     font-family: Arial, Helvetica, sans-serif;
     overflow-wrap: break-word;
 }
