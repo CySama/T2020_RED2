@@ -16,8 +16,8 @@ var sectionStyle = {
 class Login extends Component{
     state= {
         "user":{
-            "name": "",
-            "password": ""
+            "name": "marytan",
+            "password": "123456"
         }
     }
     changePassword = event => {

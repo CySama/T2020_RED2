@@ -2,7 +2,18 @@ import React from 'react';
 import {Image, Container, Card, ResponsiveEmbed} from 'react-bootstrap';
 import classes from './LeftSide.module.css';
 
+
 const leftSide = props => {
+    let getDate = (date) =>{
+        var currentdate = Date.parse(date); 
+        console.log(date);
+        // // return "Last Login: " + currentdate.getDate() + "/"
+        //             + (currentdate.getMonth()+1)  + "/" 
+        //             + currentdate.getFullYear() + " @ "  
+        //             + currentdate.getHours() + ":"  
+        //             + currentdate.getMinutes() + ":" 
+        //             + currentdate.getSeconds();
+    }
     
     return(
         <React.Fragment>
@@ -15,7 +26,8 @@ const leftSide = props => {
                     
                     Hi! {props.customerDetail.gender=="Female"? "Ms.": (props.customerDetail.gender=="Male"?"Mr.":" ")}{props.customerDetail.firstName} {props.customerDetail.lastName}
                     <br />
-                    Last Login: {props.customerDetail.lastLogIn}
+                    {getDate(props.customerDetail.lastLogIn)}
+                    {props.customerDetail.lastLogIn}
 
                     
                 </Card.Body>
@@ -25,10 +37,6 @@ const leftSide = props => {
                     Account Number: {props.customerAccDetail.accountNumber}
                     {props.customerAccDetail.displayName}
                     Type: {props.customerAccDetail.type}
-                    <br />
-                    Last Login: {props.customerDetail.lastLogIn}
-
-                    
                 </Card.Body>
                 </Card>
                 

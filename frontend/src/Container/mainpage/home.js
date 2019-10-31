@@ -20,11 +20,11 @@ class home extends Component {
     Axios.get(`http://127.0.0.1:5000/get_customer_details/${this.props.userName}`)
       .then(response => {
         this.setState({ customerDetail: response.data });
+        this.setState({ fetched: true });
         Axios.get(`http://127.0.0.1:5000/get_customer_deposit_account/${this.props.userName}`)
           .then(response => {
             this.setState({ customerAccDetail: response.data[0] });
             console.log(response.data[0]);
-            this.setState({ fetched: true });
           }).catch(error => {
             console.log(error.data);
           });
@@ -66,8 +66,7 @@ class home extends Component {
                     }}
                     rootProps={{ 'data-testid': '2' }}
                   />
-                </Col>
-                <Col sm={{ span: 12 }} md={{ span: 9 }}>
+                  <br/>
                   <Chart
                     width={'500px'}
                     height={'300px'}
@@ -84,7 +83,7 @@ class home extends Component {
                       [-1 / 3, 0, null, null],
                     ]}
                     options={{
-                      title: 'Charges of subatomic particles',
+                      title: 'Monthly expenses',
                       legend: { position: 'top', maxLines: 2 },
                       colors: ['#5C3292', '#1A8763', '#871B47', '#999999'],
                       interpolateNulls: false,
@@ -94,7 +93,7 @@ class home extends Component {
                 </Col>
               </Row>
             </Tab.Container>
-            : null}
+            : "Loading!!! Please Wait!!"}
         </Container>
       </React.Fragment>
     );
