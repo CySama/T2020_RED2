@@ -7,11 +7,14 @@ import Login from './Container/Login/Login';
 
 class App extends Component {
   state={
-    login: false
+    login: false,
+    userName: ""
 
   }
-  setLogin = value => {
+  setLogin = (value,userName) => {
     this.setState({login: value});
+    if(value===true)
+      this.setState({userName: userName});
   }
 
   render(){

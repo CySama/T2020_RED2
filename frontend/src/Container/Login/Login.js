@@ -16,7 +16,7 @@ var sectionStyle = {
 class Login extends Component{
     state= {
         "user":{
-            "userName": "",
+            "name": "",
             "password": ""
         }
     }
@@ -29,13 +29,17 @@ class Login extends Component{
     changeUserName = event => {
         console.log(event.target.value);
         let temp = this.state.user;
-        temp.userName = event.target.value;
+        temp.name = event.target.value;
         this.setState(temp);
     }
 
     login = event => {
+        console.log(this.state.user);
         Axios.post("http://127.0.0.1:5000/login", this.state.user)
         .then(response => {
+            if(response.data!=="invalid inputs"){
+                this.props.setLogin(true, response.data);
+            }
             console.log(response.data);
         })
         .catch(error =>{
@@ -60,7 +64,7 @@ class Login extends Component{
                                             <FaUserAlt />
                                         </span>
                                     </InputGroup.Prepend>
-                                    <Form.Control type="text" placeholder="Username" className={classes.Input} value={this.state.user.userName} onChange={(event) => this.changeUserName(event)}/>
+                                    <Form.Control type="text" placeholder="Username" className={classes.Input} value={this.state.user.name} onChange={(event) => this.changeUserName(event)}/>
                                 </InputGroup>
                             </Row>
                             <Row className={classes.Row}> 

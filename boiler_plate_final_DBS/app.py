@@ -10,7 +10,7 @@ import json
 # Init app
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
-cors = CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 #print(basedir)
 
 # Database
@@ -149,4 +149,4 @@ def get_list_deposit_accounts(userName):
 
 # Run Server
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(debug=True, host='0.0.0.0')
