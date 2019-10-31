@@ -192,6 +192,7 @@ def get_balance_deposit_accounts(userName):
 
 
 @app.route('/get_transaction/<userName>', methods=['GET'])
+@cross_origin()
 def get_transaction(userName):
   url = 'http://techtrek-api-gateway.ap-southeast-1.elasticbeanstalk.com/customers/' + userName
   r = requests.get(url, headers={'identity': 'Group28', 'token': 'cdf48b04-7b42-43a4-a78a-1b781fd3f2d0'} ).json()
@@ -215,6 +216,21 @@ def get_transaction(userName):
 
 
   return tiertary_r
+
+# GET Personal Messages
+@app.route('/get_personal_message/<userName>', methods=['GET'])
+@cross_origin()
+def get_personal_message(userName):
+  url = 'http://techtrek-api-gateway.ap-southeast-1.elasticbeanstalk.com/customers/' + userName
+  r = requests.get(url, headers={'identity': 'Group28', 'token': 'cdf48b04-7b42-43a4-a78a-1b781fd3f2d0'} ).json()
+  customer_id = r['customerId']
+
+  secondary_url = 'http://techtrek-api-gateway.ap-southeast-1.elasticbeanstalk.com/message/' + customer_id
+  r_secondary = requests.get(secondary_url, headers={'identity': 'Group28', 'token': 'cdf48b04-7b42-43a4-a78a-1b781fd3f2d0'} ).json()
+  r_secondary = jsonify(r_secondary)
+
+
+  return r_secondary
 
 
 # Run Server
