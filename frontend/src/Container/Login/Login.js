@@ -34,16 +34,16 @@ class Login extends Component{
     }
 
     login = event => {
-        console.log(this.state.user);
-        Axios.post("http://127.0.0.1:5000/login" , this.state.user)
+        Axios.post("http://127.0.0.1:5000/login", this.state.user)
         .then(response => {
             if(response.data!=="invalid inputs"){
+                console.log(response.data);
                 this.props.setLogin(true, response.data);
             }
             else{
                 alert("Invalid Credentials!!");
             }
-            console.log(response.data);
+            
         })
         .catch(error =>{
             console.log(error.data);

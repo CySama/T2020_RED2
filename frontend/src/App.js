@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           {
-            !this.state.login?<Login setLogin = {(value) => this.setLogin(value)}/>: 
+            this.state.login?<Login setLogin = {(value) => this.setLogin(value)}/>: 
             <MainPage userName={this.state.userName}/>
         }
           

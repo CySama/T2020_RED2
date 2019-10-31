@@ -12,6 +12,7 @@ class home extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     Axios.get("http://127.0.0.1:5000/get_customer_details/marytan")
       .then(response => {
         this.setState({ customerDetail: response.data });
@@ -61,8 +62,8 @@ class home extends Component {
                     }}
                     rootProps={{ 'data-testid': '2' }}
                   />
-                </Col>
-                <Col sm={{ span: 12 }} md={{ span: 9 }}>
+                  <br/>
+                  <Col sm={{ span: 12 }} md={{ span: 9 }}>
                   <Chart
                     width={'500px'}
                     height={'300px'}
@@ -87,6 +88,8 @@ class home extends Component {
                     rootProps={{ 'data-testid': '5' }}
                   />
                 </Col>
+                </Col>
+
               </Row>
             </Tab.Container>
             : null}
