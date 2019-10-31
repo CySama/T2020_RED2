@@ -3,6 +3,7 @@ import { Container, Card, Button, Col, Form, Row, InputGroup, Image} from 'react
 import classes from './Login.module.css'
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import Background from '../../assets/images/background.jpg';
+import Axios from 'axios';
 
 var sectionStyle = {
     width: "100%",
@@ -10,7 +11,38 @@ var sectionStyle = {
     backgroundImage: "url(" + { Background } + ")"
   };
 
+
+
 class Login extends Component{
+    state= {
+        "user":{
+            "userName": "",
+            "password": ""
+        }
+    }
+    changePassword = event => {
+        console.log(event.target.value);
+        let temp = this.state.user;
+        temp.password = event.target.value;
+        this.setState(temp);
+    }
+    changeUserName = event => {
+        console.log(event.target.value);
+        let temp = this.state.user;
+        temp.userName = event.target.value;
+        this.setState(temp);
+    }
+
+    login = event => {
+        Axios.get("http://192.168.50.240:5000/get_customer_details/marytan")
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error =>{
+            console.log(error.data);
+        });
+    }
+
     render(){
         return(
             <Container fluid >
@@ -28,7 +60,7 @@ class Login extends Component{
                                             <FaUserAlt />
                                         </span>
                                     </InputGroup.Prepend>
-                                    <Form.Control type="text" placeholder="Username" className={classes.Input}/>
+                                    <Form.Control type="text" placeholder="Username" className={classes.Input} value={this.state.user.userName} onChange={(event) => this.changeUserName(event)}/>
                                 </InputGroup>
                             </Row>
                             <Row className={classes.Row}> 
@@ -38,11 +70,11 @@ class Login extends Component{
                                             <FaLock />
                                         </span>
                                     </InputGroup.Prepend>
-                                    <Form.Control type="password" placeholder="Password" className={classes.Input}/>
+                                    <Form.Control type="password" placeholder="Password" className={classes.Input} value={this.state.user.password} onChange={(event) => this.changePassword(event)}/>
                                 </InputGroup>
                             </Row>
                             </Form>
-                        <Button variant="primary">Login</Button>
+                        <Button variant="primary" onClick={(event)=>this.login(event)}>Login</Button>
                     </Card.Body>
                     </Card>
                 </Col>
