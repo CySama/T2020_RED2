@@ -3,6 +3,7 @@ import { Container, Card, Button, Col, Form, Row, InputGroup, Image} from 'react
 import classes from './Login.module.css'
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import Background from '../../assets/images/background.jpg';
+import Axios from 'axios';
 
 var sectionStyle = {
     width: "100%",
@@ -31,6 +32,17 @@ class Login extends Component{
         temp.userName = event.target.value;
         this.setState(temp);
     }
+
+    login = event => {
+        Axios.get("http://192.168.50.240:5000/get_customer_details/marytan")
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error =>{
+            console.log(error.data);
+        });
+    }
+
     render(){
         return(
             <Container fluid >
@@ -62,7 +74,7 @@ class Login extends Component{
                                 </InputGroup>
                             </Row>
                             </Form>
-                        <Button variant="primary">Login</Button>
+                        <Button variant="primary" onClick={(event)=>this.login(event)}>Login</Button>
                     </Card.Body>
                     </Card>
                 </Col>
