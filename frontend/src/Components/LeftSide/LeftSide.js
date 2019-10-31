@@ -8,7 +8,7 @@ const leftSide = props => {
         <React.Fragment>
             
                 <Card className={classes.CentralContent}>
-                <Card.Body onClick={()=>{alert("Eh!")}}>
+                <Card.Body>
                     <ResponsiveEmbed aspectRatio="1by1">
                         <Image src = {props.imageLink} className={classes.Image}/>
                     </ResponsiveEmbed>
