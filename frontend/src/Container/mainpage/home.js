@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Tab, Col, Nav, Container } from 'react-bootstrap';
+import { Row, Tab, Col, Nav, Container, Card, ListGroup } from 'react-bootstrap';
 import Axios from 'axios';
 import LeftSide from '../../Components/LeftSide/LeftSide';
 import { Chart } from "react-google-charts";
@@ -8,6 +8,8 @@ class home extends Component {
   state = {
     customerDetail: {},
     customerAccDetail: {},
+    transaction: {},
+    marketingmsg: [],
     fetched: false
   }
 
@@ -33,8 +35,16 @@ class home extends Component {
 
           Axios.get(`http://127.0.0.1:5000/get_transaction/${this.props.userName}`)
           .then(response => {
-            this.setState({ customerAccDetail: response.data[0] });
-            console.log(response.data[0]);
+            this.setState({ transaction: response.data });
+            console.log(response.data);
+          }).catch(error => {
+            console.log(error.data);
+          });
+
+          Axios.get(`http://127.0.0.1:5000/get_marketing_msg`)
+          .then(response => {
+            this.setState({ marketingmsg: response.data });
+            console.log(response.data);
           }).catch(error => {
             console.log(error.data);
           });
@@ -59,7 +69,7 @@ class home extends Component {
                   <LeftSide imageLink={"https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"} customerDetail={this.state.customerDetail} customerAccDetail={this.state.customerAccDetail} />
                   {/* Hi! {this.state.customerDetail.gender=="Female"? "Ms.": (this.state.customerDetail.gender=="Male"?"Mr.":" ")}{this.state.customerDetail.firstName} {this.state.customerDetail.lastName} */}
                 </Col>
-                <Col sm={{ span: 12 }} md={{ span: 9 }}>
+                <Col sm={{ span: 12 }} md={{ span: 6 }}>
                   <Chart
                     width={'500px'}
                     height={'300px'}
@@ -104,6 +114,17 @@ class home extends Component {
                     }}
                     rootProps={{ 'data-testid': '5' }}
                   />
+                </Col>
+                <Col sm={{ span: 12 }} md={{ span: 3 }}>
+                <Card>
+                  <ListGroup variant="flush">
+                    {this.state.marketingmsg.map(element => {
+                      return (
+                        <ListGroup.Item>{element.summary}</ListGroup.Item>    
+                      );
+                    })}
+                  </ListGroup>
+                </Card>
                 </Col>
               </Row>
             </Tab.Container>
