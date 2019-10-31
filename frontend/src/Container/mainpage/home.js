@@ -31,10 +31,13 @@ class home extends Component {
                 Hi! {this.state.customerDetail.gender == "Female" ? "Ms." : (this.state.customerDetail.gender == "Male" ? "Mr." : " ")}{this.state.customerDetail.firstName} {this.state.customerDetail.lastName}
                 <Nav variant="pills" className="flex-column">
                   <Nav.Item>
-                    <Nav.Link eventKey="first">Tab 1</Nav.Link>
+                    <Nav.Link eventKey="first">View Transaction</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="second">Tab 2</Nav.Link>
+                    <Nav.Link eventKey="second">Expenditure</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="third">Balance</Nav.Link>
                   </Nav.Item>
                 </Nav>
               </Col>
