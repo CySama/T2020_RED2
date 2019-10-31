@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
-import { Row, Tab, Col, Nav, Container} from 'react-bootstrap';
+import { Row, Tab, Col, Nav, Container } from 'react-bootstrap';
 import Axios from 'axios';
 import LeftSide from '../../Components/LeftSide/LeftSide';
-class home extends Component{
+import { Chart } from "react-google-charts";
+class home extends Component {
 
   state = {
     customerDetail: {},
     fetched: false
   }
-  
-  componentDidMount(){
+
+  componentDidMount() {
 
     Axios.get("http://127.0.0.1:5000/get_customer_details/marytan")
     .then(response => {
         this.setState({customerDetail: response.data});
         this.setState({fetched: true});
         console.log(response.data);
-    })
-    .catch(error =>{
+      })
+      .catch(error => {
         console.log(error.data);
-    });
+      });
   }
     render(){
         return(
@@ -43,10 +44,29 @@ class home extends Component{
               <Col sm={9}>
                 <Tab.Content>
                   <Tab.Pane eventKey="first">
-
+                    <Chart
+                      width={'500px'}
+                      height={'300px'}
+                      chartType="PieChart"
+                      loader={<div>Loading Chart</div>}
+                      data={[
+                        ['Task', 'Hours per Day'],
+                        ['Work', 11],
+                        ['Eat', 2],
+                        ['Commute', 2],
+                        ['Watch TV', 2],
+                        ['Sleep', 7],
+                      ]}
+                      options={{
+                        title: 'Expenses',
+                        // Just add this option
+                        is3D: true,
+                      }}
+                      rootProps={{ 'data-testid': '2' }}
+                    />
                   </Tab.Pane>
                   <Tab.Pane eventKey="second">
-                    
+
                   </Tab.Pane>
                 </Tab.Content>
               </Col>
