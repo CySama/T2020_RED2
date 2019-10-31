@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
-
+import MainPage from './Container/mainpage/home';
 import Login from './Container/Login/Login';
 
 class App extends Component {
@@ -18,7 +18,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Login setLogin = {(value) => this.setLogin(value)}/>
+          {
+            !this.state.login?<Login setLogin = {(value) => this.setLogin(value)}/>: 
+            <MainPage />
+        }
+          
 
         </header>
       </div>
