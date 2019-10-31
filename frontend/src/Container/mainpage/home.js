@@ -11,12 +11,16 @@ class home extends Component {
     fetched: false
   }
 
+  constructor(props){
+    super(props);
+  }
+
   componentDidMount() {
     console.log(this.props);
-    Axios.get("http://127.0.0.1:5000/get_customer_details/marytan")
+    Axios.get(`http://127.0.0.1:5000/get_customer_details/${this.props.userName}`)
       .then(response => {
         this.setState({ customerDetail: response.data });
-        Axios.get("http://127.0.0.1:5000/get_customer_deposit_account/marytan")
+        Axios.get(`http://127.0.0.1:5000/get_customer_deposit_account/${this.props.userName}`)
           .then(response => {
             this.setState({ customerAccDetail: response.data[0] });
             console.log(response.data[0]);
