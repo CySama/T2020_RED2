@@ -118,7 +118,10 @@ class home extends Component {
                 <Col sm={{ span: 12 }} md={{ span: 3 }}>
                 <Card>
                   <ListGroup variant="flush">
-                    {this.state.marketingmsg.map(element => {
+
+                    {
+                      this.state.marketingmsg.map(element => {
+                      console.log(element);
                       return (
                         <ListGroup.Item>{element.summary}</ListGroup.Item>    
                       );
