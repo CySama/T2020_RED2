@@ -6,27 +6,20 @@ const leftSide = props => {
     
     return(
         <React.Fragment>
-            <Container>
+            
                 <Card className={classes.CentralContent}>
                 <Card.Body onClick={()=>{alert("Eh!")}}>
                     <ResponsiveEmbed aspectRatio="1by1">
                         <Image src = {props.imageLink} className={classes.Image}/>
                     </ResponsiveEmbed>
-                </Card.Body>
-                <Card.Body ></Card.Body>
-                </Card>
-                <Card className={classes.CentralContent}>
-                <Card.Body>Recommended Jobs</Card.Body>
-                </Card>
+                    <Card.Text>
+                    Hi! {props.customerDetail.gender=="Female"? "Ms.": (props.customerDetail.gender=="Male"?"Mr.":" ")}{props.customerDetail.firstName} {props.customerDetail.lastName}
+                    <br />
+                    Last Login: {props.customerDetail.lastLogIn}
 
-                <Card className={classes.CentralContent}>
-                <Card.Body>Applied Jobs</Card.Body>
+                    </Card.Text>
+                </Card.Body>
                 </Card>
-                
-                <Card className={classes.CentralContent}>
-                <Card.Body>Saved Jobs</Card.Body>
-                </Card>
-            </Container>
         </React.Fragment>
     );
 }
