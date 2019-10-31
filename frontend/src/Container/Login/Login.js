@@ -40,6 +40,9 @@ class Login extends Component{
             if(response.data!=="invalid inputs"){
                 this.props.setLogin(true, response.data);
             }
+            else{
+                alert("Invalid Credentials!!");
+            }
             console.log(response.data);
         })
         .catch(error =>{
