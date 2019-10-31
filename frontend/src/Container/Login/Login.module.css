@@ -1,0 +1,27 @@
+.Logo{
+    margin: 0;
+    padding: 0;
+}
+.Row{
+    margin-bottom: 10px;
+}
+.Icon{
+    color: red;
+}
+.Input{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid gray;
+}
+.Input:active{
+    outline: none;
+    
+}
+.Background{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
