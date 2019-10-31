@@ -1,0 +1,14 @@
+.Image{
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.CentralContent {
+    color: #7196da;
+    justify-content: center;    
+    text-align: center;
+    font-weight: lighter;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-wrap: break-word;
+}
+
