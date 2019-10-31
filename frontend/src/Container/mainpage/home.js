@@ -12,7 +12,6 @@ class home extends Component {
   }
 
   componentDidMount() {
-
     Axios.get("http://127.0.0.1:5000/get_customer_details/marytan")
       .then(response => {
         this.setState({ customerDetail: response.data });
