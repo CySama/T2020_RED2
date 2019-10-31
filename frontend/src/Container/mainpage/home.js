@@ -10,6 +10,7 @@ class home extends Component {
     customerAccDetail: {},
     transaction: {},
     marketingmsg: [],
+    personalmsg: [],
     fetched: false
   }
 
@@ -48,6 +49,13 @@ class home extends Component {
           }).catch(error => {
             console.log(error.data);
           });
+          Axios.get(`http://127.0.0.1:5000/get_personal_message/${this.props.userName}`)
+          .then(response => {
+            this.setState({ personalmsg: response.data });
+            console.log(response.data);
+          }).catch(error => {
+            console.log(error.data);
+          });
 
 
         console.log(response.data);
@@ -76,12 +84,12 @@ class home extends Component {
                     chartType="PieChart"
                     loader={<div>Loading Chart</div>}
                     data={[
-                      ['Task', 'Hours per Day'],
-                      ['Work', 11],
-                      ['Eat', 2],
-                      ['Commute', 2],
-                      ['Watch TV', 2],
-                      ['Sleep', 7],
+                      ['Tag', 'Amount'],
+                      ['Transport', 50.60],
+                      ['Atm', 300],
+                      ['F&B', 150.50],
+                      ['Entertainment', 230.40],
+                      ['Invest', 700.50],
                     ]}
                     options={{
                       title: 'Expenses',
@@ -91,39 +99,47 @@ class home extends Component {
                     rootProps={{ 'data-testid': '2' }}
                   />
                   <br/>
-                  <Chart
+                 <Chart
                     width={'500px'}
                     height={'300px'}
-                    chartType="Histogram"
+                    chartType="BarChart"
                     loader={<div>Loading Chart</div>}
                     data={[
-                      ['Quarks', 'Leptons', 'Gauge Bosons', 'Scalar Bosons'],
-                      [2 / 3, -1, 0, 0],
-                      [2 / 3, -1, 0, null],
-                      [2 / 3, -1, 0, null],
-                      [-1 / 3, 0, 1, null],
-                      [-1 / 3, 0, -1, null],
-                      [-1 / 3, 0, null, null],
-                      [-1 / 3, 0, null, null],
+                      ['Month', 'Amount'],
+                      ['Jan', 8175000],
+                      ['Feb', 3792000],
+                      ['March', 2695000],
+                      ['Apr', 2099000],
                     ]}
                     options={{
-                      title: 'Monthly expenses',
-                      legend: { position: 'top', maxLines: 2 },
-                      colors: ['#5C3292', '#1A8763', '#871B47', '#999999'],
-                      interpolateNulls: false,
+                      title: 'Monthly Expenses',
+                      chartArea: { width: '50%' },
                     }}
-                    rootProps={{ 'data-testid': '5' }}
+                    // For tests
+                    rootProps={{ 'data-testid': '1' }}
                   />
                 </Col>
                 <Col sm={{ span: 12 }} md={{ span: 3 }}>
-                <Card>
+                <Card style={{display: 'flex', flexFlow:'column'}}>
                   <ListGroup variant="flush">
 
                     {
                       this.state.marketingmsg.map(element => {
                       console.log(element);
                       return (
-                        <ListGroup.Item>{element.summary}</ListGroup.Item>    
+                        <ListGroup.Item style={{color:"black"}}>{element.summary}</ListGroup.Item>    
+                      );
+                    })}
+                  </ListGroup>
+                </Card>
+                <Card>
+                  <ListGroup variant="flush">
+
+                    {
+                      this.state.personalmsg.map(element => {
+                      console.log(element);
+                      return (
+                        <ListGroup.Item style={{color:"black"}}>{element.body}</ListGroup.Item>    
                       );
                     })}
                   </ListGroup>
